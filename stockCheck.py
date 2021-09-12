@@ -2,16 +2,15 @@ import sys, requests, mailSender, re
 from time import sleep
 from datetime import datetime
 
-if len(sys.argv) < 7:
-    print("Usage: <productName> <url> <textToFind> <subject> <body> <email1> <email...> <emailn>")
+if len(sys.argv) < 6:
+    print("Usage: <url-of-product> <text-to-find-in-page-for-match> <subject-of-email> <body-of-email> <recipient-email1> ...")
     sys.exit(1)
 
-productName = sys.argv[1]
-url = sys.argv[2]
-textToFind = sys.argv[3]
-subject = sys.argv[4]
-body = sys.argv[5]
-emailList = sys.argv[6:]
+url = sys.argv[1]
+textToFind = sys.argv[2]
+subject = sys.argv[3]
+body = sys.argv[4]
+emailList = sys.argv[5:]
 
 headers = {
 "Accept": "*/*",
@@ -29,7 +28,8 @@ while True:
 
     if re.search(textToFind, webpage) != None:
         print("Stock Found! | " + datetime.today().strftime('%Y-%m-%d %H:%M:%S'))
-        mailSender.sendMail(emailList, subject, body)
+        try: mailSender.sendMail(emailList, subject, body)
+        except: print("Error Sending Notification")
         sleep(600)# If content found, sleep for a while to avoid notification spam
 
     else: print("Not Found | " + datetime.today().strftime('%Y-%m-%d %H:%M:%S'))
