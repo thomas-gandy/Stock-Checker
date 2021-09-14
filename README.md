@@ -16,7 +16,7 @@ To ease having to type out all the arguments every time you want to find stock, 
 
 ## To Use (All Steps Required)
 1. Clone the project to a directory of your choosing.
-2. Create three environment variables listed below, preferably in a shell rc file, or a file sourced by it (something all shells can have access to)
+2. Create and export (important) three environment variables listed below, preferably in a shell rc file, or a file sourced by it (something all shells can have access to)
     * `stockCheckerLocation` - Set this as the absolute path to the location of this project
     * `stockCheckerSenderEmail` - Set this to the email address of your throwaway notifier account
     * `stockCheckerPassword` - Set this to the password of your email account
